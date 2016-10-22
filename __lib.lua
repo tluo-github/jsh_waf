@@ -34,6 +34,25 @@ function get_user_agent()
     return USER_AGENT
 end
 --[[
+--判断是否有上传文件
+ ]]
+function get_boundary()
+    local header = ngx.req.get_headers()["content-type"]
+    if not header then
+        return false
+    end
+    if type(header) == "table" then
+        header = header[1]
+    end
+    local match = string.match
+    ngx.say(header)
+    local m = match(header,".*boundary=.*")
+    if m then
+        return true
+    end
+    return false
+end
+--[[
 --去除字符串两边空格
  ]]
 function trim(s)

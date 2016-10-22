@@ -138,7 +138,7 @@ function url_attack_check()
         local URL_RULES = get_rule('url.rule')
         local REQ_URI = ngx.var.request_uri
         for _,rule in pairs(URL_RULES) do
-            if rule ~="" and rulematch(REQ_URI,rule,"isjo") then
+            if rule ~="" and rulematch(unescape(REQ_URI),rule,"isjo") then
                 log_record('Deny_URL',REQ_URI,"-",rule)
                 waf_output()
                 return true
@@ -175,14 +175,38 @@ function url_args_attack_check()
     return false
 end
 --[[
+--检查上传文件后缀
+ ]]
+function upload_file_check()
+    local method=ngx.req.get_method()
+    if method == "POST" then
+        local boundary = get_boundary()
+        ngx.say(boundary)
+        if boundary then
+            local POST_ARGS =ngx.req.get_body_data()
+            ngx.say(type(POST_ARGS))
+            if POST_ARGS ~=nil then
+                for key, val in pairs(POST_ARGS) do
+                    if type(val) == "table" then
+                        ARGS_DATA = table.concat(val, " ")
+                    else
+                        ARGS_DATA = val
+                    end
+                    ngx.say(ARGS_DATA)
+                end
+            end
+        end
+    end
+end
+--[[
 --过滤POST参数
  ]]
 function post_attack_check()
     local method=ngx.req.get_method()
     if config_post_check == "on" and method == "POST" then
         local POST_RULES = get_rule('post.rule')
-        for _,rule in pairs(ARGS_RULES) do
-            local POST_ARGS = ngx.req.get_post_args()
+        for _,rule in pairs(POST_RULES) do
+            local POST_ARGS =ngx.req.get_body_data()
             if POST_ARGS ~=nil then
                 for key, val in pairs(POST_ARGS) do
                     if type(val) == "table" then

@@ -9,6 +9,7 @@ config_waf_enable = "on" --防火墙状态
 config_attack_log = "on" --是否记录日志
 config_log_dir = "/usr/local/nginx/logs/hack/" --日志目录
 config_rule_dir = "/usr/local/nginx/conf/jsh_waf/rule-config" --规则目录
+config_file_ext = {"php","jsp"} --禁止哪些后缀名文件上传
 config_white_ip_check = "on" --是否开启白名单IP检查
 config_black_ip_check = "on" --是否开启黑名单IP检查
 config_white_url_check = "on" --是否开启白名单url
