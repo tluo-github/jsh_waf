@@ -79,16 +79,16 @@ error while loading shared libraries: libluajit-5.1.so.2: cannot open shared obj
 ####WAF部署
 
 <pre>
+#cd /usr/local/nginx/conf
 #git clone https://github.com/tluolovembtan/jsh_waf
-#cp -a ./waf/waf /usr/local/openresty/nginx/conf/
+
 
 修改Nginx的配置文件，加入以下配置。注意路径，同时WAF日志默认存放在/tmp/日期_waf.log
 #WAF
     lua_shared_dict limit 50m;
-    lua_package_path "/usr/local/openresty/nginx/conf/waf/?.lua";
-    init_by_lua_file "/usr/local/openresty/nginx/conf/waf/init.lua";
-    access_by_lua_file "/usr/local/openresty/nginx/conf/waf/access.lua";
+    lua_package_path "/usr/local/openresty/nginx/conf/jsh_waf/?.lua";
+    init_by_lua_file "/usr/local/openresty/nginx/conf/jsh_waf/init.lua";
+    access_by_lua_file "/usr/local/openresty/nginx/conf/jsh_waf/waf.lua";
 
-[root@openstack-compute-node5 ~]# /usr/local/openresty/nginx/sbin/nginx –t
-[root@openstack-compute-node5 ~]# /usr/local/openresty/nginx/sbin/nginx
+[root@openstack-compute-node5 ~]# /usr/local/nginx/sbin/nginx
 </pre>
