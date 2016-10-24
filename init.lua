@@ -164,6 +164,7 @@ function url_args_attack_check()
                     end
                     if ARGS_DATA and type(ARGS_DATA) ~= "boolean" and rule ~="" then
                          if rulematch(unescape(ARGS_DATA),rule,"isjo") then
+                             log_record('Deny_URL_Args',ngx.var.request_uri,"-",rule)
                              waf_output()
                              return true
                          end
@@ -185,7 +186,7 @@ function post_attack_check()
             --这是文件上传
             local POST_ARGS =ngx.req.get_body_data()
             local FILE_RULES = get_rule('file.rule')
-            if rulematch(POST_ARGS,"(.php|.java)","isjo") then
+            if rulematch(POST_ARGS,FILE_RULES,"isjo") then
                 waf_output()
                 return true
             end
