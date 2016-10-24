@@ -45,7 +45,6 @@ function get_boundary()
         header = header[1]
     end
     local match = string.match
-    ngx.say(header)
     local m = match(header,".*boundary=.*")
     if m then
         return true

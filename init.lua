@@ -175,48 +175,28 @@ function url_args_attack_check()
     return false
 end
 --[[
---检查上传文件后缀
- ]]
-function upload_file_check()
-    local method=ngx.req.get_method()
-    if method == "POST" then
-        local boundary = get_boundary()
-        ngx.say(boundary)
-        if boundary then
-            local POST_ARGS =ngx.req.get_body_data()
-            ngx.say(type(POST_ARGS))
-            if POST_ARGS ~=nil then
-                for key, val in pairs(POST_ARGS) do
-                    if type(val) == "table" then
-                        ARGS_DATA = table.concat(val, " ")
-                    else
-                        ARGS_DATA = val
-                    end
-                    ngx.say(ARGS_DATA)
-                end
-            end
-        end
-    end
-end
---[[
 --过滤POST参数
  ]]
 function post_attack_check()
     local method=ngx.req.get_method()
     if config_post_check == "on" and method == "POST" then
-        local POST_RULES = get_rule('post.rule')
-        for _,rule in pairs(POST_RULES) do
+        local boundary = get_boundary()
+        if boundary then
+            --这是文件上传
             local POST_ARGS =ngx.req.get_body_data()
-            if POST_ARGS ~=nil then
-                for key, val in pairs(POST_ARGS) do
-                    if type(val) == "table" then
-                        ARGS_DATA = table.concat(val, " ")
-                    else
-                        ARGS_DATA = val
-                    end
-                    ngx.say(ARGS_DATA)
-                    if ARGS_DATA and type(ARGS_DATA) ~= "boolean" and rule ~="" then
-                        if rulematch(unescape(ARGS_DATA),rule,"isjo") then
+            local FILE_RULES = get_rule('file.rule')
+            if rulematch(POST_ARGS,"(.php|.java)","isjo") then
+                waf_output()
+                return true
+            end
+        else
+            --这是表单提交
+            local POST_RULES = get_rule('post.rule')
+            if POST_RULES ~= nil then
+                for _,rule in pairs(POST_RULES) do
+                    local POST_ARGS =ngx.req.get_body_data()
+                    if POST_ARGS ~=nil then
+                        if rulematch(unescape(POST_ARGS),rule,"isjo") then
                             waf_output()
                             return true
                         end
@@ -224,6 +204,7 @@ function post_attack_check()
                 end
             end
         end
+
     end
     return false
 end

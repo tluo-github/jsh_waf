@@ -16,7 +16,6 @@ function waf_main()
     elseif url_attack_check() then  --第七层 过来URL路径
     elseif url_args_attack_check() then --第八层 url参数检查
     elseif post_attack_check() then --第九层 post提交的参数检查
-    elseif upload_file_check() then --第十层 upload拦截一句话
     else
         return
     end
