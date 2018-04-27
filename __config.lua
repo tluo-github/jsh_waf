@@ -36,7 +36,7 @@ p{margin-top:10px; margin-bottom:10px; margin-left:0px; margin-right:0px; -qt-bl
 </style>
 <body>
 <div class="container">
-  <div class="title">家生活应用防火墙</div>
+  <div class="title">Bruce's Blog 应用防火墙</div>
    <div class="box">
       <span >欢迎白帽子进行授权安全测试,安全漏洞请联系QQ:530308461</span>
 	  <p>你的IP已被记录,请勿在未授权情况下继续</p>
