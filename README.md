@@ -1,55 +1,52 @@
 # waf
-Ê¹ÓÃNginx+LuaÊµÏÖ×Ô¶¨ÒåWAF£¨Web application firewall£©
+ä½¿ç”¨Nginx+Luaå®ç°è‡ªå®šä¹‰WAFï¼ˆWeb application firewallï¼‰
 
-##°æÈ¨ÉùÃ÷
-    ÑÏÖØ²Î¿¼£¨ÕÕ³­£©https://github.com/loveshell/ngx_lua_waf
-    ÑÏÖØ²Î¿¼£¨ÕÕ³­£©https://github.com/unixhot/waf
-####¹¦ÄÜÁĞ±í£º
-1.	Ö§³ÖIP°×Ãûµ¥ºÍºÚÃûµ¥¹¦ÄÜ£¬Ö±½Ó½«ºÚÃûµ¥µÄIP·ÃÎÊ¾Ü¾ø¡£
-2.	Ö§³ÖURL°×Ãûµ¥£¬½«²»ĞèÒª¹ıÂËµÄURL½øĞĞ¶¨Òå¡£
-3.	Ö§³ÖUser-AgentµÄ¹ıÂË£¬Æ¥Åä×Ô¶¨Òå¹æÔòÖĞµÄÌõÄ¿£¬È»ºó½øĞĞ´¦Àí£¨·µ»Ø403£©¡£
-4.	Ö§³ÖCookie¹ıÂË£¬Æ¥Åä×Ô¶¨Òå¹æÔòÖĞµÄÌõÄ¿£¬È»ºó½øĞĞ´¦Àí£¨·µ»Ø403£©¡£
-5.	Ö§³ÖURL¹ıÂË£¬Æ¥Åä×Ô¶¨Òå¹æÔòÖĞµÄÌõÄ¿£¬Èç¹ûÓÃ»§ÇëÇóµÄURL°üº¬ÕâĞ©£¬·µ»Ø403¡£
-6.	Ö§³ÖURL²ÎÊı¹ıÂË£¬Ô­ÀíÍ¬ÉÏ¡£
-7.	Ö§³ÖÈÕÖ¾¼ÇÂ¼£¬½«ËùÓĞ¾Ü¾øµÄ²Ù×÷£¬¼ÇÂ¼µ½ÈÕÖ¾ÖĞÈ¥¡£
+####åŠŸèƒ½åˆ—è¡¨ï¼š
+1.	æ”¯æŒIPç™½åå•å’Œé»‘åå•åŠŸèƒ½ï¼Œç›´æ¥å°†é»‘åå•çš„IPè®¿é—®æ‹’ç»ã€‚
+2.	æ”¯æŒURLç™½åå•ï¼Œå°†ä¸éœ€è¦è¿‡æ»¤çš„URLè¿›è¡Œå®šä¹‰ã€‚
+3.	æ”¯æŒUser-Agentçš„è¿‡æ»¤ï¼ŒåŒ¹é…è‡ªå®šä¹‰è§„åˆ™ä¸­çš„æ¡ç›®ï¼Œç„¶åè¿›è¡Œå¤„ç†ï¼ˆè¿”å›403ï¼‰ã€‚
+4.	æ”¯æŒCookieè¿‡æ»¤ï¼ŒåŒ¹é…è‡ªå®šä¹‰è§„åˆ™ä¸­çš„æ¡ç›®ï¼Œç„¶åè¿›è¡Œå¤„ç†ï¼ˆè¿”å›403ï¼‰ã€‚
+5.	æ”¯æŒURLè¿‡æ»¤ï¼ŒåŒ¹é…è‡ªå®šä¹‰è§„åˆ™ä¸­çš„æ¡ç›®ï¼Œå¦‚æœç”¨æˆ·è¯·æ±‚çš„URLåŒ…å«è¿™äº›ï¼Œè¿”å›403ã€‚
+6.	æ”¯æŒURLå‚æ•°è¿‡æ»¤ï¼ŒåŸç†åŒä¸Šã€‚
+7.	æ”¯æŒæ—¥å¿—è®°å½•ï¼Œå°†æ‰€æœ‰æ‹’ç»çš„æ“ä½œï¼Œè®°å½•åˆ°æ—¥å¿—ä¸­å»ã€‚
 
-####WAFÊµÏÖ
-   WAFÒ»¾ä»°ÃèÊö£¬¾ÍÊÇ½âÎöHTTPÇëÇó£¨Ğ­Òé½âÎöÄ£¿é£©£¬¹æÔò¼ì²â£¨¹æÔòÄ£¿é£©£¬×ö²»Í¬µÄ·ÀÓù¶¯×÷£¨¶¯×÷Ä£¿é£©£¬²¢½«·ÀÓù¹ı³Ì£¨ÈÕÖ¾Ä£¿é£©¼ÇÂ¼ÏÂÀ´¡£ËùÒÔ±¾ÎÄÖĞµÄWAFµÄÊµÏÖÓÉÎå¸öÄ£¿é(ÅäÖÃÄ£¿é¡¢Ğ­Òé½âÎöÄ£¿é¡¢¹æÔòÄ£¿é¡¢¶¯×÷Ä£¿é¡¢´íÎó´¦ÀíÄ£¿é£©×é³É¡£
+####WAFå®ç°
+   WAFä¸€å¥è¯æè¿°ï¼Œå°±æ˜¯è§£æHTTPè¯·æ±‚ï¼ˆåè®®è§£ææ¨¡å—ï¼‰ï¼Œè§„åˆ™æ£€æµ‹ï¼ˆè§„åˆ™æ¨¡å—ï¼‰ï¼Œåšä¸åŒçš„é˜²å¾¡åŠ¨ä½œï¼ˆåŠ¨ä½œæ¨¡å—ï¼‰ï¼Œå¹¶å°†é˜²å¾¡è¿‡ç¨‹ï¼ˆæ—¥å¿—æ¨¡å—ï¼‰è®°å½•ä¸‹æ¥ã€‚æ‰€ä»¥æœ¬æ–‡ä¸­çš„WAFçš„å®ç°ç”±äº”ä¸ªæ¨¡å—(é…ç½®æ¨¡å—ã€åè®®è§£ææ¨¡å—ã€è§„åˆ™æ¨¡å—ã€åŠ¨ä½œæ¨¡å—ã€é”™è¯¯å¤„ç†æ¨¡å—ï¼‰ç»„æˆã€‚
 
-####Nginx + Lua²¿Êğ
+####Nginx + Luaéƒ¨ç½²
 
-»·¾³×¼±¸
+ç¯å¢ƒå‡†å¤‡
     [root@nginx-lua ~]# cd /usr/local/src
-Ê×ÏÈ£¬ÏÖÔÚNginx°²×°±Ø±¸µÄNginxºÍPCREÈí¼ş°ü¡£
+é¦–å…ˆï¼Œç°åœ¨Nginxå®‰è£…å¿…å¤‡çš„Nginxå’ŒPCREè½¯ä»¶åŒ…ã€‚
 <pre>
 [root@nginx-lua src]# wget http://nginx.org/download/nginx-1.9.4.tar.gz
 [root@nginx-lua src]# wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.37.tar.gz
 </pre>
-Æä´Î£¬ÏÂÔØµ±Ç°×îĞÂµÄluajitºÍngx_devel_kit (NDK)£¬ÒÔ¼°´º¸ç£¨ÕÂ£©±àĞ´µÄlua-nginx-module
+å…¶æ¬¡ï¼Œä¸‹è½½å½“å‰æœ€æ–°çš„luajitå’Œngx_devel_kit (NDK)ï¼Œä»¥åŠæ˜¥å“¥ï¼ˆç« ï¼‰ç¼–å†™çš„lua-nginx-module
 <pre>
   [root@nginx-lua src]# wget http://luajit.org/download/LuaJIT-2.0.4.tar.gz
   [root@nginx-lua src]# wget https://github.com/simpl/ngx_devel_kit/archive/v0.2.19.tar.gz
   [root@nginx-lua src]# wget https://github.com/openresty/lua-nginx-module/archive/v0.9.16.tar.gz
 </pre>
 
-×îºó£¬´´½¨NginxÔËĞĞµÄÆÕÍ¨ÓÃ»§
+æœ€åï¼Œåˆ›å»ºNginxè¿è¡Œçš„æ™®é€šç”¨æˆ·
    [root@nginx-lua src]# useradd -s /sbin/nologin -M www
 
-½âÑ¹NDKºÍlua-nginx-module
+è§£å‹NDKå’Œlua-nginx-module
 <pre>
-    [root@openstack-compute-node5 src]# tar zxvf v0.2.19 ½âÑ¹ºóÎªngx_devel_kit-0.2.19
-    [root@openstack-compute-node5 src]# tar zxvf v0.9.10½âÑ¹ºóÎªlua-nginx-module-0.9.16
+    [root@openstack-compute-node5 src]# tar zxvf v0.2.19 è§£å‹åä¸ºngx_devel_kit-0.2.19
+    [root@openstack-compute-node5 src]# tar zxvf v0.9.10è§£å‹åä¸ºlua-nginx-module-0.9.16
 </pre>
 
-°²×°LuaJIT
-LuajitÊÇLua¼´Ê±±àÒëÆ÷¡£
+å®‰è£…LuaJIT
+Luajitæ˜¯Luaå³æ—¶ç¼–è¯‘å™¨ã€‚
 <pre>
   [root@openstack-compute-node5 src]# tar zxvf LuaJIT-2.0.3.tar.gz 
   [root@openstack-compute-node5 src]# cd LuaJIT-2.0.3
   [root@openstack-compute-node5 LuaJIT-2.0.3]# make && make install
 </pre>
 
-°²×°Nginx²¢¼ÓÔØÄ£¿é
+å®‰è£…Nginxå¹¶åŠ è½½æ¨¡å—
 <pre>
   [root@openstack-compute-node5 src]# tar zxvf nginx-1.9.4.tar.gz 
   [root@openstack-compute-node5 src]# cd nginx-1.9.4
@@ -60,30 +57,30 @@ LuajitÊÇLua¼´Ê±±àÒëÆ÷¡£
 
   [root@openstack-compute-node5 ~]# ln -s /usr/local/lib/libluajit-5.1.so.2 /lib64/libluajit-5.1.so.2
 </pre>
-Èç¹û²»´´½¨·ûºÅÁ´½Ó£¬¿ÉÄÜ³öÏÖÒÔÏÂÒì³££º
+å¦‚æœä¸åˆ›å»ºç¬¦å·é“¾æ¥ï¼Œå¯èƒ½å‡ºç°ä»¥ä¸‹å¼‚å¸¸ï¼š
 error while loading shared libraries: libluajit-5.1.so.2: cannot open shared object file: No such file or directory
 
-#####²âÊÔ°²×°
-°²×°Íê±Ïºó£¬ÏÂÃæ¿ÉÒÔ²âÊÔ°²×°ÁË£¬ĞŞ¸Änginx.conf Ôö¼ÓµÚÒ»¸öÅäÖÃ¡£
+#####æµ‹è¯•å®‰è£…
+å®‰è£…å®Œæ¯•åï¼Œä¸‹é¢å¯ä»¥æµ‹è¯•å®‰è£…äº†ï¼Œä¿®æ”¹nginx.conf å¢åŠ ç¬¬ä¸€ä¸ªé…ç½®ã€‚
 <pre>
         location /hello {
                 default_type 'text/plain';
                 content_by_lua 'ngx.say("hello,lua")';
         }
     
-[root@openstack-compute-node5 ~]# /usr/local/nginx-1.9.4/sbin/nginx ¨Ct
+[root@openstack-compute-node5 ~]# /usr/local/nginx-1.9.4/sbin/nginx â€“t
 [root@openstack-compute-node5 ~]# /usr/local/nginx-1.9.4/sbin/nginx
 </pre>
 
-È»ºó·ÃÎÊhttp://xxx.xxx.xxx.xxx/hello£¬Èç¹û³öÏÖhello,lua¡£±íÊ¾°²×°Íê³É,È»ºó¾Í¿ÉÒÔ¡£
-####WAF²¿Êğ
+ç„¶åè®¿é—®http://xxx.xxx.xxx.xxx/helloï¼Œå¦‚æœå‡ºç°hello,luaã€‚è¡¨ç¤ºå®‰è£…å®Œæˆ,ç„¶åå°±å¯ä»¥ã€‚
+####WAFéƒ¨ç½²
 
 <pre>
 #cd /usr/local/nginx/conf
 #git clone https://github.com/tluolovembtan/jsh_waf
 
 
-ĞŞ¸ÄNginxµÄÅäÖÃÎÄ¼ş£¬¼ÓÈëÒÔÏÂÅäÖÃ¡£×¢ÒâÂ·¾¶£¬Í¬Ê±WAFÈÕÖ¾Ä¬ÈÏ´æ·ÅÔÚ/tmp/ÈÕÆÚ_waf.log
+ä¿®æ”¹Nginxçš„é…ç½®æ–‡ä»¶ï¼ŒåŠ å…¥ä»¥ä¸‹é…ç½®ã€‚æ³¨æ„è·¯å¾„ï¼ŒåŒæ—¶WAFæ—¥å¿—é»˜è®¤å­˜æ”¾åœ¨/tmp/æ—¥æœŸ_waf.log
 #WAF
     lua_shared_dict limit 50m;
     lua_package_path "/usr/local/openresty/nginx/conf/jsh_waf/?.lua";
